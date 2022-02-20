@@ -12,10 +12,16 @@ $score = $_SESSION['score'];
     <!-- Bootstrap CSS -->
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
 
     <title>Quizz PHP</title>
 </head>
 <body>
+<header>
+    <?php require_once "menu.php"?>
+</header>
 <div class="container-fluid center-container">
     <h1 class="text-danger text-center">RESULTAT DU QUIZZ !</h1>
     <div class="text-center">
