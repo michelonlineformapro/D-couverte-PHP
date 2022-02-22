@@ -58,12 +58,38 @@
 
     //Test d'acces a une variable locale
 
-   echo "la variable dollars locale dans la fonction porteeLocale() " . $locale;
+   echo "la variable dollars locale dans la fonction porteeLocale() ";
 
    //Constant
-   define("CONSTANTE", "<hr>ceci est une constante");
+   define("CONSTANTE", "<hr>ceci est une constante<br>");
 
    echo CONSTANTE;
+
+   $z = "bon";
+   $y = "yo";
+
+   $z .= $y. "<br>";
+
+   echo  $z;
+   if($z ?? $y){
+       var_dump($z);
+       var_dump($y);
+   }
+
+   $p = 0;
+   $toto = $p++;
+   $tata = ++$p;
+   $titi = $p--;
+   $tutu = --$p;
+
+   var_dump($toto);
+    var_dump($tata);
+    var_dump($titi);
+    var_dump($tutu);
+
+    echo $tata. " " . $titi ." ". $tutu." ".$toto;
+
+
 
     ?>
 
