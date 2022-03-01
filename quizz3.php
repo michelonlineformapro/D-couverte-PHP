@@ -31,24 +31,22 @@ $question1 = array(
 </header>
 <div class="container-fluid center-container-quizz">
     <?php
-    var_dump($_SESSION['score']);
-
     foreach ($question1 as $value) {
         ?>
         <h2 id="question" class="text-center text-warning"><?= $value['question'] ?></h2>
-        <p id="score" class="alert alert-success text-center">Votre score <?= $_SESSION['score'] ?> / 5 </p>
+        <p class="alert alert-success text-center">Question : 3 / 5 </p>
         <div id="row" class="row">
             <form method="post">
 
                 <div class="col-md-6 col-sm-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="reponses1" id="reponse1">
+                        <input class="form-check-input" type="radio" name="reponses" id="reponse1" value="<?= $value['reponses1'] ?>"/>
                         <label class="form-check-label" for="reponses1">
                             <?= $value['reponses1']; ?>
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="reponses2" id="reponse2">
+                        <input class="form-check-input" type="radio" name="reponses" id="reponse2" value="<?= $value['reponses2'] ?>">
                         <label class="form-check-label" for="reponses2">
                             <?= $value['reponses2']; ?>
                         </label>
@@ -57,75 +55,78 @@ $question1 = array(
 
                 <div class="col-md-6 col-sm-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="reponses3" id="reponse3">
+                        <input class="form-check-input" type="radio" name="reponses" id="reponse3" value="<?= $value['reponses3'] ?>">
                         <label class="form-check-label" for="reponses3">
                             <?= $value['reponses3']; ?>
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="reponses4" id="reponse4">
+                        <input class="form-check-input" type="radio" name="reponses" id="reponse4" value="<?= $value['reponses4'] ?>">
                         <label class="form-check-label" for="reponses4">
                             <?= $value['reponses4']; ?>
                         </label>
                     </div>
                 </div>
+
                 <button name="btn-valide-1" id="btn-valide" class="btn btn-primary mt-3">VALIDER</button>
+
             </form>
         </div>
         <?php
         if(isset($_POST['btn-valide-1'])){
 
-            if(isset($_POST['reponses3'])){
-                echo "<p class='alert alert-success text-center mt-3'>BONNE REPONSE</p>";
-                echo "<a href='quizz4.php' class='btn btn-success mt-3'>Question suivante</a>";
-                $_SESSION['score'] += 1;
-                ?>
-                <style>
-                    #btn-valide{
-                        display: none;
-                    }
-                    #question{
-                        display: none;
-                    }
-                    #row{
-                        display: none;
-                    }
-                    #score{
-                        display: none;
-                    }
-                </style>
-                <?php
+            if(isset($_POST['reponses'])){
+                $reponse = $_POST['reponses'];
+                //var_dump($reponse);
+                if($reponse === $value['reponses3']){
+                    echo "<p class='alert alert-success text-center mt-3'>BONNE REPONSE = " .$value['reponses3']."</p>";
+                    $_SESSION['score'] += 1;
+                    echo "<p class='mt-3 alert alert-warning'>SCORE = " . $_SESSION['score']." / 5 </p>";
+                    echo "<a href='quizz4.php' class='btn btn-success mt-3'>Question suivante</a>";
+
+                    ?>
+                    <style>
+                        #btn-valide{
+                            display: none;
+                        }
+                        #question{
+                            display: none;
+                        }
+                        #row{
+                            display: none;
+                        }
+                    </style>
+                    <?php
+                }else{
+                    echo "<p class='alert alert-danger text-center mt-3'>ERREUR : BONNE REPONSE = " .$value['reponses3']."</p>";
+                    echo "<p class='mt-3 alert alert-warning'>SCORE = " . $_SESSION['score']." / 5</p>";
+                    $_SESSION['score'] += 0;
+                    echo "<a href='quizz4.php' class='btn btn-outline-dark mt-3'>Question suivante</a>";
+
+                    ?>
+                    <style>
+                        #btn-valide{
+                            display: none;
+                        }
+                        #question{
+                            display: none;
+                        }
+                        #row{
+                            display: none;
+                        }
+                    </style>
+                    <?php
+                }
+
+                //var_dump($_POST['reponses1']);
+                //var_dump($_POST['reponses2']);
+                //var_dump($_POST['reponses3']);
+                //var_dump($_POST['reponses4']);
+                //var_dump($_SESSION['score']);
             }else{
-                echo "<p class='alert alert-danger text-center mt-3'>MAUVAISE REPONSE</p>";
-                echo "<a href='quizz4.php' class='btn btn-danger mt-3'>Question suivante</a>";
-                $_SESSION['score'] += 0;
-                ?>
-                <style>
-                    #btn-valide{
-                        display: none;
-                    }
-                    #question{
-                        display: none;
-                    }
-                    #row{
-                        display: none;
-                    }
-                    #score{
-                        display: none;
-                    }
-                </style>
-                <?php
+                echo "<p class='mt-3'>MERCI DE VALIDER VOTRE REPONSE</p>";
             }
-
-
-            //var_dump($_POST['reponses1']);
-            //var_dump($_POST['reponses2']);
-            //var_dump($_POST['reponses3']);
-            //var_dump($_POST['reponses4']);
-            var_dump($_SESSION['score']);
-        }else{
-            echo "<p class='mt-3'>MERCI DE VALIDER VOTRE REPONSE</p>";
         }
     }
     ?>
@@ -137,5 +138,3 @@ $question1 = array(
 
 </body>
 </html>
-
-
